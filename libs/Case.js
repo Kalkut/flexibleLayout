@@ -94,7 +94,7 @@ sand.define('Case',["Geo/*"], function (r) {
 				this.cursorOver;
 				this.posClick = [this.img.width/2,this.img.height/2];
 				this.z = 0;
-
+				this.influencAreas = [toDOM({ tag : '.case-up'}),toDOM({ tag : '.case-right'}),toDOM({ tag : '.case-down'}),toDOM({ tag : '.case-left'})]
 				this.div.onmousedown = function (e) {
 					e.preventDefault()
 					this.clicking = true;

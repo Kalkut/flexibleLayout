@@ -1,0 +1,50 @@
+.outer{
+  height: 430px;
+  width: 430px;
+  position: absolute;
+  background-color: green;
+  padding : 0px;
+}
+
+.inner{
+  left : 15px;
+  top : 15px;
+  height: 400px;
+  width: 400px;
+  background-color: blue;
+  position : absolute;
+}
+
+.top{
+  left : 15px;
+  height: 15px;
+  width: 400px;
+  background-color: red;
+  position : absolute;
+}
+
+.left{
+  top : 15px;
+  height: 400px;
+  width: 15px;
+  background-color: red;
+  position : absolute;
+}
+
+.right{
+  left : 415px;
+  top : 15px;
+  height: 400px;
+  width: 15px;
+  background-color: red;
+  position : absolute;
+}
+
+.bottom{
+  height: 15px;
+  width: 400px;
+  background-color: red;
+  position : absolute;
+  bottom : 0px;
+  left : 15px;
+}
