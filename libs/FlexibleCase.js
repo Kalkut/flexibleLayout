@@ -2,7 +2,7 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
   return r.Case.extend({
     '+init' : function (flexibleCase) {
 
-      var breadth = flexibleCase.influenceArea && flexibleCase.influenceArea.breadth ? flexibleCase.influenceArea.breadth : "15px" 
+      this.breadth = flexibleCase.influenceArea && flexibleCase.influenceArea.breadth ? flexibleCase.influenceArea.breadth : "15px" 
       
       this.influence = {
         top : false,
@@ -16,7 +16,7 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
         tag : '.case-top', 
         style : { 
           width : this.div.style.width, 
-          height : breadth
+          height : this.breadth
         },
         events : {
           mouseover : function () {
@@ -30,7 +30,7 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
       toDOM({ 
         tag : '.case-right', 
         style : { 
-          width : breadth, 
+          width : this.breadth, 
           height : this.div.style.height
         },
         events : {
@@ -46,7 +46,7 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
         tag : '.case-bottom', 
         style : { 
           width : this.div.style.width, 
-          height : breadth
+          height : this.breadth
         },
         events : {
           mouseover : function () {
@@ -60,7 +60,7 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
       toDOM({ 
         tag : '.case-left', 
         style : { 
-          width : breadth , 
+          width : this.breadth , 
           height : this.div.style.height
         },
         events : {
@@ -77,8 +77,8 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
       this.el = toDOM({
         tag : '.flexibleCase', 
         style : { 
-          width : (parseInt(this.div.style.width) + 2*parseInt(breadth) + "px"), 
-          height : (parseInt(this.div.style.height) + 2*parseInt(breadth) + "px"),
+          width : (parseInt(this.div.style.width) + 2*parseInt(this.breadth) + "px"), 
+          height : (parseInt(this.div.style.height) + 2*parseInt(this.breadth) + "px"),
         },
         children : this.influenceAreas.concat(this.div)
       });
@@ -107,8 +107,8 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
       document.body.addEventListener("mouseup", function (e) {
         for(var position in this.influence){
           if(this.influence[position]){
-            this.fire('FlexibleCase:CaseDropSuccesful',this.img.src,position)
-            console.log(this.img.src,position)
+            this.fire('FlexibleCase:CaseDropSuccesful',this.img.src,position);
+            console.log(this.img.src,position);
             break;
           }
         }
@@ -142,9 +142,9 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
         }.bind(this)
       })*/
 
-this.on('FlexibleCase:CaseDropSuccesful', function (imgDropped,influence) {
-  /*this.fire(imgDropped,{type : influence.className, case :  COMMENT AVOIR LA CASE ??? });*/
-})
+/*this.on('FlexibleCase:CaseDropSuccesful', function (imgDropped,influence) {
+})*/
+
 }
 })
 })
