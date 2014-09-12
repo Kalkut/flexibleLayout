@@ -38,7 +38,7 @@ sand.define('Case',["Geo/*"], function (r) {
 			this.div = toDOM({
 				tag : 'div.' + (options.prefix ? (options.prefix + "-") : "") + "case",
 				style : {
-					position : "absolute",
+					/*position : "absolute",*/
 					overflow : "hidden",
 					width : options.width,
 					height : options.height,
@@ -94,7 +94,6 @@ sand.define('Case',["Geo/*"], function (r) {
 				this.cursorOver;
 				this.posClick = [this.img.width/2,this.img.height/2];
 				this.z = 0;
-				this.influencAreas = [toDOM({ tag : '.case-up'}),toDOM({ tag : '.case-right'}),toDOM({ tag : '.case-down'}),toDOM({ tag : '.case-left'})]
 				this.div.onmousedown = function (e) {
 					e.preventDefault()
 					this.clicking = true;
@@ -175,7 +174,6 @@ sand.define('Case',["Geo/*"], function (r) {
 
 			if (!this.fit && !(this.imgRect.segX.c2 >= this.divRect.segX.c2 && this.imgRect.segX.c1 <= this.divRect.segX.c1 && this.imgRect.segY.c1 <= this.divRect.segY.c1 && this.imgRect.segY.c2 >= this.divRect.segY.c2)){
 				var fitImg = this.divRect.move({staticPoint : this.staticPoint}).forcedIn(this.imgRect);
-				console.log('verif')
 				
 				 this.imgRect.segX.c1 = this.imgRect.segX.c1 - fitImg.segX.c1;
 				 this.img.style.left =  this.imgRect.segX.c1 + 'px'; 
@@ -250,6 +248,12 @@ sand.define('Case',["Geo/*"], function (r) {
 
 		setColor : function(color) {
 			this.txtBloc.children[0].children[0].children[0].style.color = color;
+		},
+
+		reSize : function(size) {
+			this.div.style.width = size.width;
+			this.div.style.height = size.height;
+			this.loadCase();
 		}
 	})
 })
