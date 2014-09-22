@@ -82,40 +82,6 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
         },
         children : this.influenceAreas.concat(this.div)
       });
-
-      this.dragging = false;
-      
-      //this.draggedCase = toDOM({}); 
-
-      this.div.addEventListener("mousedown", function (e) {
-        if (e.shiftKey && !this.dragging) {
-          this.dragging = true;
-          this.draggedCase = this.div.cloneNode(true);
-          this.draggedCase.style.pointerEvents = "none";
-          document.body.appendChild(this.draggedCase);
-        }
-      }.bind(this))
-
-      document.body.addEventListener("mousemove", function (e) {
-        if(this.dragging){
-          this.clicking = false;
-          this.draggedCase.style.left = e.clientX - $(document.body).offset().left;
-          this.draggedCase.style.top = e.clientY - $(document.body).offset().top;
-        }
-      }.bind(this))
-
-      document.body.addEventListener("mouseup", function (e) {
-        for(var position in this.influence){
-          if(this.influence[position]){
-            this.fire('FlexibleCase:CaseDropSuccesful',this.img.src,position);
-            console.log(this.img.src,position);
-            break;
-          }
-        }
-        if(this.dragging) document.body.removeChild(this.draggedCase);
-        this.dragging = false;
-        }.bind(this))
-
       // START DOESN'T ACTIVATE UPON CREATION OF DRAGGED DIV 
       /*r.handle(this.draggedCase).drag({
         start : function(e) {
@@ -141,10 +107,27 @@ sand.define('flexibleLayout/FlexibleCase',['Case','DOM/handle'], function (r) {
           document.body.removeChild(this.draggedCase);
         }.bind(this)
       })*/
+    },
 
-/*this.on('FlexibleCase:CaseDropSuccesful', function (imgDropped,influence) {
-})*/
-
-}
-})
+    reSizeFlex : function (size) {
+      var breadth = parseInt(this.breadth);
+      if(size.width && size.height) {
+        this.el.style.width = size.width;
+        this.el.style.height = size.height;
+        this.influenceAreas[0].style.width = this.influenceAreas[2].style.width = size.width - 2*breadth;
+        this.influenceAreas[1].style.height = this.influenceAreas[3].style.height = size.height - 2*breadth;
+        this.reSize({width : size.width - 2*this.breadth, height : size.height - 2*breadth});
+      } else if (size.width){
+        this.el.style.width = size.width;
+        this.influenceAreas[0].style.width = this.influenceAreas[2].style.width = size.width - 2*breadth;
+        this.reSize({width : size.width - 2*breadth});
+      } else if (size.height){
+        this.el.style.height = size.height;
+        this.el.children[1].style.height = size.height - 2*breadth;
+        this.el.children[3].style.height = size.height - 2*breadth;
+        console.log(this.el.children[1].style.height)
+        this.reSize({height : size.height - 2*breadth});
+      }
+    }
+  })
 })

@@ -26,17 +26,22 @@
   <script src="/FlexibleCase.js"></script>
   <script src="/coremin.js"></script>
   <script src="/DOMmin.js"></script>
+  <script src="/Cluster.js"></script>
+  <script src="/FlexibleLayout.js"></script>
   
   
   <script type="text/javascript">
     var c;
     var c2;
+    var clust;
+    var fl;
 
-    sand.require("flexibleLayout/FlexibleCase", function (r) {
-      c = new r.FlexibleCase({width : 400, height : 400, type : 'img', imgSrc : '/future.png'});
-      c2 = new r.FlexibleCase({width : 400, height : 400, type : 'img', imgSrc : '/nasa.jpg'});
-      document.body.appendChild(c.el);
-      document.body.appendChild(c2.el);
+    sand.require("flexibleLayout/*", function (r) {
+      c = new r.flexibleLayout.FlexibleCase({width : 400, height : 400, type : 'img', imgSrc : '/future.png'});
+      c2 = new r.flexibleLayout.FlexibleCase({width : 400, height : 400, type : 'img', imgSrc : '/nasa.jpg'});
+      clust = new r.flexibleLayout.Cluster({cases : [c,c2]});
+      fl = new r.flexibleLayout.FlexibleLayout({clusters : [clust]})
+      document.body.appendChild(fl.el);
     })
   </script>
 </body>

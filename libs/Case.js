@@ -251,8 +251,9 @@ sand.define('Case',["Geo/*"], function (r) {
 		},
 
 		reSize : function(size) {
-			this.div.style.width = size.width;
-			this.div.style.height = size.height;
+			if(size.width) this.div.style.width = parseInt(size.width);
+			if(size.height)this.div.style.height = parseInt(size.height);
+			console.log(this.div.style.height);
 			this.loadCase();
 		}
 	})
